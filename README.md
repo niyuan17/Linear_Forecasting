@@ -99,6 +99,35 @@ A Project Verifying Hull and Qiao’s Paper On Market Timing
 **Correlation with future return**
 ![Alt text](correlation_with_future_return.jpg)
 
+
+## B. Regression Models
+1. Basic idea:
+Use the predictors to predict future return, with multiple regression models.
+2. Defining the data:
+Our "Y" is the n-day future return of SPX, where n = 130 (as the paper suggested) or 60
+For each predictor, calculate the correlation between Y and (1) the predictor's raw value, (2) ewma of this predictor, (3) log of this predictor (we abandoned this one). Then we use the one with maximum correlation as our "transformed predictor"
+In some models we use raw values of predictors, while in others we use transformed value.
+3. Our Methods:
+From 2001.1.1 to 2017.1.1, on the first day of month, we used past m-year (m=10 or 5, where 10 is suggested in the paper) daily data, excluding most recent n days (n=130, for example), as our training set to fit regression parameters. The parameters are used to predict future returns on each day of that month.
+The predicted future return is then used to calculate position in PnL backtesting.
+
+**(1) simpLR and LR_Trans("Kitchen sink" model)**
+This is the basic, simplest regression model where we use every predictor as long as it exists.
+We have two models here. simpLR uses raw values, and LR_Trans uses transfromed values to fit the model, and find that they generates almost identical results. So for simplicity we only use raw values in the following values.
+
+**(2) corrLR (Correlation screening model)**
+Unlike the first model, here we only use those predictors with a correlation to Y that's higher than a threshold. The papre proposed threshold=0.1, and we also tried other values.
+
+**(3) realCorrLR ("Real-time" correlation screening model)**
+This one is similar to (2), except that we exclude those predictors in our model before they were first proposed (or "invented") in history.
+For example, a certain indicator might be first noticed in 2006, and later people fill the values of this indicator before 2006. In this case we only include it after 2006.
+This is the model with the best performance in the paper
+
+**(4) elasticNet (Elastic net model)**
+This model was not mentioned in the paper.
+We test different combination of parameters (alpha, which controls the size of penalty term; and l1_ratio, which controls the ratio of l1_norm penalty and l2_norm penalty.)
+
+
 Normal text **bold** then *italic*.
 Escape \* \` \< \_ \# \\ & more.
 
