@@ -25,6 +25,6 @@ URL: [Edditoria][1] | image: ![2][]
 
 # Enjoy! :)
 
-![alt text](Linear_Forecasting/correlation_of_predictors.jpg)
+[[https://github.com/niyuan17/Linear_Forecasting/blob/master/correlation_of_predictors.jpg|alt=octocat]]
 
 
