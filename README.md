@@ -25,6 +25,6 @@ URL: [Edditoria][1] | image: ![2][]
 
 # Enjoy! :)
 
-![alt text](https://files.slack.com/files-pri/T7BM0U1FE-F7J5Q1PRA/correlation_with_future_return.jpg)
+![alt text](Linear_Forecasting/correlation_of_predictors.jpg)
 
 
