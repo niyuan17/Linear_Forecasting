@@ -102,8 +102,8 @@ A Project Verifying Hull and Qiao’s Paper On Market Timing
 
 ## B. Regression Models
 1. Basic idea:
-Use the predictors to predict future return, with multiple regression models.
-2. Defining the data:
+	Use the predictors to predict future return, with multiple regression models.
+2. Defining the data: 
 Our "Y" is the n-day future return of SPX, where n = 130 (as the paper suggested) or 60
 For each predictor, calculate the correlation between Y and (1) the predictor's raw value, (2) ewma of this predictor, (3) log of this predictor (we abandoned this one). Then we use the one with maximum correlation as our "transformed predictor"
 In some models we use raw values of predictors, while in others we use transformed value.
@@ -111,8 +111,8 @@ In some models we use raw values of predictors, while in others we use transform
 From 2001.1.1 to 2017.1.1, on the first day of month, we used past m-year (m=10 or 5, where 10 is suggested in the paper) daily data, excluding most recent n days (n=130, for example), as our training set to fit regression parameters. The parameters are used to predict future returns on each day of that month.
 The predicted future return is then used to calculate position in PnL backtesting.
 
-**(1) simpLR and LR_Trans("Kitchen sink" model)**
-This is the basic, simplest regression model where we use every predictor as long as it exists.
+- ** simpLR and LR_Trans("Kitchen sink" model)**
+	This is the basic, simplest regression model where we use every predictor as long as it exists.
 We have two models here. simpLR uses raw values, and LR_Trans uses transfromed values to fit the model, and find that they generates almost identical results. So for simplicity we only use raw values in the following values.
 
 **(2) corrLR (Correlation screening model)**
